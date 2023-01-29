@@ -28,7 +28,7 @@ jobs:
 
     - name: generate helm repo
       run: |
-        cd helm
+        cd charts
         for ELEM in */; do
           NAME=$(echo $ELEM | tr -d '/')
           echo $NAME
