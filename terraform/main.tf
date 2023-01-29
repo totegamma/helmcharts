@@ -2,7 +2,7 @@
 terraform {
     backend "s3" {
         bucket = "tfstates.gammalab.net"
-        key    = "tfportal.tfstate"
+        key    = "helmcharts.tfstate"
         region = "ap-northeast-1"
     }
     required_providers {
