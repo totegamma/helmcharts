@@ -27,7 +27,7 @@ jobs:
       run: aws s3 sync s3://www20230129061446997100000001 charts
 
     - name: generate helm repo
-      run:
+      run: |
         cd helm
         for ELEM in */; do
           NAME=$(echo $ELEM | tr -d '/')
