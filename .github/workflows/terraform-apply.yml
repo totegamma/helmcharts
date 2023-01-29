@@ -1,0 +1,32 @@
+name: 'Terraform-Apply'
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Configure AWS credentials from IAM Role
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Terraform Init
+      run: terraform -chdir=terraform init -var="acm_certificate_arm=$CERTIFICATE_ARN"
+      env:
+        CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
+
+    - name: Terraform Apply
+      run: terraform -chdir=terraform apply -auto-approve -var="acm_certificate_arm=$CERTIFICATE_ARN"
+      env:
+        CERTIFICATE_ARN: ${{ secrets.CERTIFICATE_ARN }}
+
