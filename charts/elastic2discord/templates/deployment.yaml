@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "elastic2discord.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ include "elastic2discord.name" . }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "elastic2discord.name" . }}
+    spec:
+      containers:
+      - name: {{ include "elastic2discord.name" . }}
+        image: ghcr.io/totegamma/elastic2discord:master
+        imagePullPolicy: Always
+        env:
+          - name: ELASTIC_USERNAME
+            value: {{ .Values.elastic.username | quote }}
+          - name: ELASTIC_PASSWORD
+            value: {{ .Values.elastic.password | quote }}
+          - name: ELASTIC_ENDPOINT
+            value: {{ .Values.elastic.endpoint | quote }}
+          - name: DISCORD_BOT_TOKEN
+            value: {{ .Values.discord.bot_token | quote }}
+          - name: DISCORD_CHANNEL_ID
+            value: {{ .Values.discord.channel_id | quote }}
+          - name: DISCORD_MESSAGE_ID
+            value: {{ .Values.discord.message_id | quote }}
+          - name: EVAL_INTERVAL
+            value: {{ .Values.application.interval | quote }}
+          - name: QUERY
+            value: {{ .Values.application.query }}
+          - name: TEMPLATE
+            value: {{ .Values.application.template }}
+        livenessProbe:
+          exec:
+            command:
+              - rm
+              - /tmp/healthy
+          initialDelaySeconds: {{ .Values.livenessprobe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessprobe.periodSeconds }}
+

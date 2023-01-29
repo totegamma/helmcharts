@@ -20,6 +20,22 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
         aws-region: ${{ secrets.AWS_REGION }}
 
+    - name: install helm
+      run: curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+
+    - name: download from s3
+      run: aws s3 sync s3://www20230129061446997100000001 charts
+
+    - name: generate helm repo
+      run:
+        cd helm
+        for ELEM in */; do
+          NAME=$(echo $ELEM | tr -d '/')
+          echo $NAME
+          helm package $ELEM
+        done
+        helm repo index .
+
     - name: Terraform Init
       run: terraform -chdir=terraform init -var="acm_certificate_arm=$CERTIFICATE_ARN"
       env:

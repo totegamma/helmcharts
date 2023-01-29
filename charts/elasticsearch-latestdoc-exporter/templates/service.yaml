@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+  labels:
+    name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+spec:
+  ports:
+  - port: 5000
+    protocol: TCP
+  selector:
+    name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+  type: LoadBalancer

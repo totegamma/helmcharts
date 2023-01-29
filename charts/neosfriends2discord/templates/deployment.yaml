@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "neosfriends2discord.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ include "neosfriends2discord.name" . }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "neosfriends2discord.name" . }}
+    spec:
+      containers:
+      - name: {{ include "neosfriends2discord.name" . }}
+        image: ghcr.io/totegamma/neosfriends2discord:master
+        imagePullPolicy: Always
+        env:
+          - name: NEOS_USERNAME
+            value: {{ .Values.neos.username | quote }}
+          - name: NEOS_PASSWORD
+            value: {{ .Values.neos.password | quote }}
+          - name: NEOS_MACHINEID
+            value: {{ .Values.neos.machineid | quote }}
+          - name: DISCORD_BOT_TOKEN
+            value: {{ .Values.discord.bot_token | quote }}
+          - name: DISCORD_CHANNEL_ID
+            value: {{ .Values.discord.channel_id | quote }}
+          - name: DISCORD_MESSAGE_ID
+            value: {{ .Values.discord.message_id | quote }}
+          - name: EVAL_INTERVAL
+            value: {{ .Values.application.interval | quote }}
+          - name: MESSAGE_PREFIX
+            value: {{ .Values.application.message_prefix | quote }}
+        livenessProbe:
+          exec:
+            command:
+              - rm
+              - /tmp/healthy
+          initialDelaySeconds: {{ .Values.livenessprobe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessprobe.periodSeconds }}
+

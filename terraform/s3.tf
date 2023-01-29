@@ -33,7 +33,7 @@ locals {
 }
 
 resource "aws_s3_object" "web" {
-    for_each = fileset("${path.cwd}/charts/", "**")
+    for_each = fileset("${path.cwd}/charts/", "*.{tgz,yaml}")
     bucket = aws_s3_bucket.www.id
     key = each.value
     content_type = lookup(local.mime_types, regex("\\.[^.]+$", each.value), null)

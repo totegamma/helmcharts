@@ -1,0 +1,19 @@
+
+application:
+  message_prefix: ''
+  interval: 30
+
+neos:
+    username: ''
+    password: ''
+    machineid: ''
+
+discord:
+  bot_token: ''
+  channel_id: ''
+  message_id: ''
+
+livenessprobe:
+  initialDelaySeconds: 30
+  periodSeconds: 120
+

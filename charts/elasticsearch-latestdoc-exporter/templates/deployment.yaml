@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+  template:
+    metadata:
+      labels:
+        name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+    spec:
+      containers:
+      - name: {{ include "elasticsearch-latestdoc-exporter.name" . }}
+        image: ghcr.io/totegamma/elasticsearchlatestdocexporter:master
+        ports:
+          - containerPort: 3000
+        imagePullPolicy: Always
+        env:
+          - name: ELASTIC_USERNAME
+            value: {{ .Values.elastic.username | quote }}
+          - name: ELASTIC_PASSWORD
+            value: {{ .Values.elastic.password | quote }}
+          - name: ELASTIC_ENDPOINT
+            value: {{ .Values.elastic.endpoint | quote }}
+{{ range $i, $query := .Values.application.queries }}
+          - name: QUERY{{ $i }}
+            value: {{ $query }}
+{{ end }}
+{{ range $i, $name := .Values.application.names }}
+          - name: NAME{{ $i }}
+            value: {{ $name | quote }}
+{{ end }}
+          - name: ENTRY_COUNT
+            value: {{ (len $.Values.application.queries) | quote }}
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: {{ .Values.livenessprobe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.livenessprobe.periodSeconds }}
+

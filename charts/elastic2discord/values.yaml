@@ -1,0 +1,20 @@
+
+application:
+  query: ''
+  template: ''
+  interval: 30
+
+elastic:
+    username: ''
+    password: ''
+    endpoint: ''
+
+discord:
+  bot_token: ''
+  channel_id: ''
+  message_id: ''
+
+livenessprobe:
+  initialDelaySeconds: 30
+  periodSeconds: 120
+
