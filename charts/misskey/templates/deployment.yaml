@@ -1,0 +1,119 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misskey-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: misskey-web
+  template:
+    metadata:
+      labels:
+        name: misskey-web
+    spec:
+      containers:
+      - name: misskey-web
+        image: misskey/misskey
+        ports:
+          - containerPort: {{ .Values.web.port }}
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - /bin/bash
+              - /misskey/healthcheck.sh
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        volumeMounts:
+          - name: misskey-config
+            mountPath: /misskey/.config
+          - name: misskey-files
+            mountPath: /misskey/files
+      volumes:
+        - name: misskey-config
+          configMap:
+            name: misskey-config
+            items:
+            - key: default.yml
+              path: default.yml
+              mode: 0644
+        - name: misskey-files
+          persistentVolumeClaim:
+            claimName: misskey-files
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misskey-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: misskey-redis
+  template:
+    metadata:
+      labels:
+        name: misskey-redis
+    spec:
+      containers:
+      - name: misskey-redis
+        image: redis-7-alpine
+        ports:
+          - containerPort: {{ .Values.redis.port }}
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - redis-cli
+              - ping
+          initialDelaySeconds: 60
+          periodSeconds: 30
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misskey-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: misskey-db
+  template:
+    metadata:
+      labels:
+        name: misskey-db
+    spec:
+      containers:
+      - name: misskey-db
+        image: postgres:15-alpine
+        ports:
+          - containerPort: {{ .Values.db.port }}
+        imagePullPolicy: Always
+        env:
+          - name: POSTGRES_PASSWORD
+            value: {{ .Values.db.password | quote }}
+          - name: POSTGRES_USER
+            value: {{ .Values.db.username | quote }}
+          - name: POSTGRES_DB
+            value: {{ .Values.db.name | quote }}
+        livenessProbe:
+          exec:
+            command:
+              - pg_isready
+              - -U
+              - $POSTGRES_USER
+              - -d
+              - $POSTGRES_DB
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        volumeMounts:
+          - name: postgres-varlib
+            mountPath: /var/lib/postgresql
+      volumes:
+        - name: postgres-varlib
+          persistentVolumeClaim:
+            claimName: postgres-varlib
+

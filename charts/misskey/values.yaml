@@ -1,0 +1,19 @@
+
+url: 'https://example.tld/'
+
+web:
+  port: 3000
+  fileStorageSize: '1Gi'
+
+db:
+  hostname: 'misskey-db'
+  port: 5432
+  name: 'misskey'
+  username: 'misskey-user'
+  password: 'misskey-pass'
+  fileStorageSize: '1Gi'
+
+redis:
+  hostname: 'misskey-redis'
+  port: 6379
+
