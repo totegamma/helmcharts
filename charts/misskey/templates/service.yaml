@@ -6,7 +6,8 @@ metadata:
     name: misskey
 spec:
   ports:
-  - port: {{ .Values.web.port }}
+  - port: {{ .Values.port }}
+    targetport: {{ .Values.web.port }}
     protocol: TCP
   selector:
     name: misskey-web

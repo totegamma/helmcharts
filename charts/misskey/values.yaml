@@ -1,5 +1,6 @@
 
 url: 'https://example.tld/'
+port: 80
 
 web:
   port: 3000
