@@ -40,7 +40,7 @@ data:
     #───┘ PostgreSQL configuration └────────────────────────────────
 
     db:
-      host: {{ .Values.db.host }}
+      host: {{ .Values.db.hostname }}
       port: {{ .Values.db.port }}
 
       # Database name
