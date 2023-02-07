@@ -22,12 +22,11 @@ spec:
           - containerPort: {{ .Values.web.port }}
         imagePullPolicy: Always
         livenessProbe:
-          exec:
-            command:
-              - /bin/bash
-              - /misskey/healthcheck.sh
+          httpGet:
+            path: /
+            port: {{ .Values.web.port }}
           initialDelaySeconds: 60
-          periodSeconds: 30
+          periodSeconds: 10
         volumeMounts:
           - name: misskey-config
             mountPath: /misskey/.config
