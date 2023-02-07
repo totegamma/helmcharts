@@ -4,6 +4,7 @@ url: 'https://example.tld/'
 web:
   port: 3000
   fileStorageSize: '1Gi'
+  image: 'misskey/misskey'
 
 db:
   hostname: 'misskey-db'
@@ -12,8 +13,10 @@ db:
   username: 'misskey-user'
   password: 'misskey-pass'
   fileStorageSize: '1Gi'
+  image: 'postgres:15-alpine'
 
 redis:
   hostname: 'misskey-redis'
   port: 6379
+  image: 'redis:7-alpine'
 

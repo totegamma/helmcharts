@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: misskey-web
-        image: misskey/misskey
+        image: {{ .Values.web.image }}
         ports:
           - containerPort: {{ .Values.web.port }}
         imagePullPolicy: Always
@@ -59,7 +59,7 @@ spec:
     spec:
       containers:
       - name: misskey-redis
-        image: redis-7-alpine
+        image: {{ .Values.redis.image }}
         ports:
           - containerPort: {{ .Values.redis.port }}
         imagePullPolicy: Always
@@ -88,7 +88,7 @@ spec:
     spec:
       containers:
       - name: misskey-db
-        image: postgres:15-alpine
+        image: {{ .Values.db.image }}
         ports:
           - containerPort: {{ .Values.db.port }}
         imagePullPolicy: Always
