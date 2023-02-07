@@ -5,6 +5,7 @@ web:
   port: 3000
   fileStorageSize: '1Gi'
   image: 'misskey/misskey'
+  NODE_ENV: 'production'
 
 db:
   hostname: 'misskey-db'

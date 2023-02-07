@@ -15,6 +15,9 @@ spec:
       containers:
       - name: misskey-web
         image: {{ .Values.web.image }}
+        env:
+          - name: NODE_ENV
+            value: {{ .Values.web.NODE_ENV | quote }}
         ports:
           - containerPort: {{ .Values.web.port }}
         imagePullPolicy: Always
