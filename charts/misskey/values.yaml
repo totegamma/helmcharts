@@ -25,10 +25,9 @@ redis:
 elasticsearch:
   enabled: false
   hostname: 'elasticsearch-master'
-  port: 9200
+  httpPort: 9200
   ssl: false
-  user: 'elastic'
-  pass: 'elastic'
+  createCert: false
   replicas: '1'
   resources:
     requests:
@@ -39,13 +38,4 @@ elasticsearch:
       memory: '2Gi'
   secret:
     password: 'elastic'
-  esConfig:
-    elasticsearch.yml: |
-      xpack.security.enabled: false
-      xpack.security.transport.ssl.enabled: false
-      xpack.security.http.ssl.enabled: false
-  extraEnvs:
-    - name: ELASTIC_PASSWORD
-      value: 'elastic'
-
 

@@ -74,10 +74,10 @@ data:
 {{ if .Values.elasticsearch.enabled }}
     elasticsearch:
       host: {{ .Values.elasticsearch.hostname }}
-      port: {{ .Values.elasticsearch.port }}
+      port: {{ .Values.elasticsearch.httpPort }}
       ssl: {{ .Values.elasticsearch.ssl }}
-      user: {{ .Values.elasticsearch.user }}
-      pass: {{ .Values.elasticsearch.pass }}
+      user: elastic
+      pass: {{ .Values.elasticsearch.secret.password }}
 {{ end }}
 
     #   ┌───────────────┐
