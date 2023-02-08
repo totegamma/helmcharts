@@ -71,7 +71,7 @@ data:
     #   ┌─────────────────────────────┐
     #───┘ Elasticsearch configuration └─────────────────────────────
 
-{{ if .Values.elasticsearch.enable }}
+{{ if .Values.elasticsearch.enabled }}
     elasticsearch:
       host: {{ .Values.elasticsearch.hostname }}
       port: {{ .Values.elasticsearch.port }}
