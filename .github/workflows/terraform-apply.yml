@@ -32,6 +32,7 @@ jobs:
         for ELEM in */; do
           NAME=$(echo $ELEM | tr -d '/')
           echo $NAME
+          helm dependency update $ELEM
           helm package $ELEM
         done
         helm repo index .
