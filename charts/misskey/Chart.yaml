@@ -4,7 +4,7 @@ description: A Helm chart for misskey
 name: misskey
 version: 0.2.0
 dependencies:
-  - name: elastic-search
+  - name: elasticsearch
     version: 8.5.1
     repository: https://helm.elastic.co
     condition: elasticsearch.enable
