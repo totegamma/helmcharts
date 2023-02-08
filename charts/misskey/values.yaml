@@ -23,7 +23,7 @@ redis:
   image: 'redis:7-alpine'
 
 elasticsearch:
-  enable: false
+  enabled: false
   hostname: 'elasticsearch-master'
   port: 9200
   ssl: false
