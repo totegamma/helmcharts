@@ -29,6 +29,23 @@ elasticsearch:
   ssl: false
   user: 'elastic'
   pass: 'elastic'
-  resources.requests.cpu: '300m'
   replicas: '1'
+  resources:
+    requests:
+      cpu: '300m'
+      memory: "0.5Gi"
+    limits:
+      cpu: '1000m'
+      memory: '2Gi'
+  secret:
+    password: 'elastic'
+  esConfig:
+    elasticsearch.yml: |
+      xpack.security.enabled: false
+      xpack.security.transport.ssl.enabled: false
+      xpack.security.http.ssl.enabled: false
+  extraEnvs:
+    - name: ELASTIC_PASSWORD
+      value: 'elastic'
+
 
