@@ -22,3 +22,11 @@ redis:
   port: 6379
   image: 'redis:7-alpine'
 
+elasticsearch:
+  enable: false
+  hostname: 'elasticsearch-master'
+  port: 9200
+  ssl: false
+  user: 'elastic'
+  pass: 'elastic'
+

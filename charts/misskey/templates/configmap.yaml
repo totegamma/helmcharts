@@ -71,12 +71,14 @@ data:
     #   ┌─────────────────────────────┐
     #───┘ Elasticsearch configuration └─────────────────────────────
 
-    #elasticsearch:
-    #  host: localhost
-    #  port: 9200
-    #  ssl: false
-    #  user:
-    #  pass:
+{{ if .Values.elasticsearch.enable }}
+    elasticsearch:
+      host: {{ .Values.elasticsearch.hostname }}
+      port: {{ .Values.elasticsearch.port }}
+      ssl: {{ .Values.elasticsearch.ssl }}
+      user: {{ .Values.elasticsearch.user }}
+      pass: {{ .Values.elasticsearch.pass }}
+{{ end }}
 
     #   ┌───────────────┐
     #───┘ ID generation └───────────────────────────────────────────
