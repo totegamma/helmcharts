@@ -29,4 +29,6 @@ elasticsearch:
   ssl: false
   user: 'elastic'
   pass: 'elastic'
+  resources.requests.cpu: '300m'
+  replicas: '1'
 
