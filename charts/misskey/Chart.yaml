@@ -2,9 +2,4 @@ apiVersion: v2
 appVersion: "0.1"
 description: A Helm chart for misskey
 name: misskey
-version: 0.2.6
-dependencies:
-  - name: elasticsearch
-    version: 8.5.1
-    repository: https://helm.elastic.co
-    condition: elasticsearch.enabled
+version: 0.3.0

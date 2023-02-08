@@ -68,18 +68,6 @@ data:
       #prefix: example-prefix
       #db: 1
 
-    #   ┌─────────────────────────────┐
-    #───┘ Elasticsearch configuration └─────────────────────────────
-
-{{ if .Values.elasticsearch.enabled }}
-    elasticsearch:
-      host: {{ .Values.elasticsearch.hostname }}
-      port: {{ .Values.elasticsearch.httpPort }}
-      ssl: {{ .Values.elasticsearch.ssl }}
-      user: elastic
-      pass: {{ .Values.elasticsearch.secret.password }}
-{{ end }}
-
     #   ┌───────────────┐
     #───┘ ID generation └───────────────────────────────────────────
 

@@ -22,20 +22,3 @@ redis:
   port: 6379
   image: 'redis:7-alpine'
 
-elasticsearch:
-  enabled: false
-  hostname: 'elasticsearch-master'
-  httpPort: 9200
-  ssl: false
-  createCert: false
-  replicas: '1'
-  resources:
-    requests:
-      cpu: '300m'
-      memory: "0.5Gi"
-    limits:
-      cpu: '1000m'
-      memory: '2Gi'
-  secret:
-    password: 'elastic'
-
