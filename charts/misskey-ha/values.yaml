@@ -1,0 +1,31 @@
+
+url: 'https://example.tld/'
+port: 80
+
+web:
+  port: 3000
+  fileStorageSize: '1Gi'
+  image: 'misskey/misskey'
+  NODE_ENV: 'production'
+
+db:
+  hostname: 'misskey-db'
+  port: 5432
+  username: 'misskey-user'
+  password: 'misskey-pass'
+  fileStorageSize: '1Gi'
+  numberOfInstances: 1
+  postgresVersion: '15'
+
+redis:
+  hostname: 'misskey-redis'
+  port: 6379
+  image: 'redis:7-alpine'
+
+postgres-operator-ui:
+  enabled: false
+  service:
+    type: 'ClusterIP'
+  envs:
+    targetNamespace: 'misskey'
+

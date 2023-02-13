@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misskey-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: misskey-web
+  template:
+    metadata:
+      labels:
+        name: misskey-web
+    spec:
+      containers:
+      - name: misskey-web
+        image: {{ .Values.web.image }}
+        env:
+          - name: NODE_ENV
+            value: {{ .Values.web.NODE_ENV | quote }}
+        ports:
+          - containerPort: {{ .Values.web.port }}
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.web.port }}
+          initialDelaySeconds: 60
+          periodSeconds: 10
+        volumeMounts:
+          - name: misskey-config
+            mountPath: /misskey/.config
+          - name: misskey-files
+            mountPath: /misskey/files
+      volumes:
+        - name: misskey-config
+          configMap:
+            name: misskey-config
+            items:
+            - key: default.yml
+              path: default.yml
+              mode: 0644
+        - name: misskey-files
+          persistentVolumeClaim:
+            claimName: misskey-files
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: misskey-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: misskey-redis
+  template:
+    metadata:
+      labels:
+        name: misskey-redis
+    spec:
+      containers:
+      - name: misskey-redis
+        image: {{ .Values.redis.image }}
+        ports:
+          - containerPort: {{ .Values.redis.port }}
+        imagePullPolicy: Always
+        livenessProbe:
+          exec:
+            command:
+              - redis-cli
+              - ping
+          initialDelaySeconds: 60
+          periodSeconds: 30
+
