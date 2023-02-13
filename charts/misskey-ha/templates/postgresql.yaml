@@ -9,7 +9,7 @@ spec:
   allowedSourceRanges: null
   numberOfInstances: {{ .Values.db.numberOfInstances }}
   postgresql:
-    version: {{ .Values.db.postgresVersion }}
+    version: {{ .Values.db.postgresVersion | quote }}
   resources:
     limits:
       cpu: 500m
