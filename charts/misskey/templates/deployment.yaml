@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: misskey-web
 spec:
-  replicas: 1
+  replicas: {{ .Values.web.replicas }}
   selector:
     matchLabels:
       name: misskey-web
@@ -104,11 +104,9 @@ spec:
         livenessProbe:
           exec:
             command:
-              - pg_isready
-              - -U
-              - $POSTGRES_USER
-              - -d
-              - $POSTGRES_DB
+              - bash 
+              - -c
+              - pg_isready -U $POSTGRES_USER -d $POSTGRES_DB
           initialDelaySeconds: 60
           periodSeconds: 30
         volumeMounts:
