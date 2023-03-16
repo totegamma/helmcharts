@@ -23,3 +23,11 @@ redis:
   port: 6379
   image: 'redis:7-alpine'
 
+backup:
+  enabled: true
+  cron: '* 20 * * *'
+  s3key: 's3://examplebucket/'
+  aws_access_key_id: ''
+  aws_secret_access_key: ''
+  aws_default_region: 'ap-northeast-1'
+
