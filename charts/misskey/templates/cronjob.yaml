@@ -22,8 +22,8 @@ spec:
             - name: AWS_DEFAULT_REGION
               value: {{ .Values.backup.aws_default_region | quote }}
             command:
-            - /bin/sh
-            - -cex
+            - /bin/bash
+            - -cx
             - |
               pg_dump -Fc -d {{ .Values.db.name }} -h {{ .Values.db.hostname }} -U {{ .Values.db.username }} > misskey.dump
               zip misskey.dump.zip misskey.dump
