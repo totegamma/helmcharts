@@ -24,10 +24,11 @@ spec:
             command:
             - /bin/sh
             - -cex
-            - pg_dump -Fc -d {{ .Values.db.name }} -h {{ .Values.db.hostname }} -U {{ .Values.db.username }} > misskey.dump
-            - zip misskey.dump misskey.dump.zip
-            - zip -r files.dump files/
-            - aws s3 sync . {{ .Values.backup.s3key }} --include "*.zip"
+            - |
+              pg_dump -Fc -d {{ .Values.db.name }} -h {{ .Values.db.hostname }} -U {{ .Values.db.username }} > misskey.dump
+              zip misskey.dump.zip misskey.dump
+              zip -rq files.zip files/
+              aws s3 sync . {{ .Values.backup.s3key }} --exclude "*" --include "*.zip"
             volumeMounts:
               - name: misskey-files
                 mountPath: /workdir/files
