@@ -28,11 +28,11 @@ spec:
             - zip misskey.dump misskey.dump.zip
             - zip -r files.dump files/
             - aws s3 sync . {{ .Values.backup.s3key }} --include "*.zip"
-        volumeMounts:
-          - name: misskey-files
-            mountPath: /workdir/files
-      volumes:
-        - name: misskey-files
-          persistentVolumeClaim:
-            claimName: misskey-files
+            volumeMounts:
+              - name: misskey-files
+                mountPath: /workdir/files
+          volumes:
+            - name: misskey-files
+              persistentVolumeClaim:
+                claimName: misskey-files
 {{ end }}
