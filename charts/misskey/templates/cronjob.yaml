@@ -20,7 +20,7 @@ spec:
             - name: AWS_SECRET_ACCESS_KEY
               value: {{ .Values.backup.aws_secret_access_key | quote }}
             - name: AWS_DEFAULT_REGION
-              value: {{ .Values.backup.aws_default_region | qutoe }}
+              value: {{ .Values.backup.aws_default_region | quote }}
             command:
             - /bin/sh
             - -cex
