@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: hourly-dog
+spec:
+  schedule: {{ .Values.application.cron | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hourlydogbot
+            image: ghcr.io/totegamma/hourlydogbot:master
+            env:
+            - name: BOT_TOKEN
+              value: {{ .Values.application.bot_token | quote }}
+            - name: DOG_ENDPOINT
+              value: {{ .Values.application.dog_endpoint | quote }}
+            - name: MESSAGE
+              value: {{ .Values.application.message | quote }}
+          restartPolicy: Never
+

@@ -1,0 +1,7 @@
+
+application:
+  bot_token: ''
+  cron: '0 * * * *'
+  dog_endpoint: 'https://dog.ceo/api/breeds/image/random'
+  message: ':mofumofuda:'
+
