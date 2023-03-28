@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: misskey-web
 spec:
-  replicas: 1
+  replicas: {{ .Values.web.replicas }}
   selector:
     matchLabels:
       name: misskey-web
@@ -27,6 +27,12 @@ spec:
             port: {{ .Values.web.port }}
           initialDelaySeconds: 60
           periodSeconds: 10
+        startupProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.web.port }}
+          failureThreshold: 100
+          periodSeconds: 3
         volumeMounts:
           - name: misskey-config
             mountPath: /misskey/.config

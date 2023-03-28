@@ -11,11 +11,12 @@ web:
 db:
   hostname: 'misskey-db'
   port: 5432
+  postgresVersion: 15
+  replicas: 1
+  storageClassName: 'nfs'
+  storageSize: '1Gi'
   username: 'misskey-user'
   password: 'misskey-pass'
-  fileStorageSize: '1Gi'
-  numberOfInstances: 1
-  postgresVersion: '15'
 
 redis:
   hostname: 'misskey-redis'
