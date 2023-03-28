@@ -23,10 +23,3 @@ redis:
   port: 6379
   image: 'redis:7-alpine'
 
-postgres-operator-ui:
-  enabled: false
-  service:
-    type: 'ClusterIP'
-  envs:
-    targetNamespace: 'misskey'
-
