@@ -20,7 +20,7 @@ spec:
   backups:
     pgbackrest:
       repos:
-        - name: s3
+        - name: repo1
           s3:
             bucket: {{ .Values.db.backup.bucket }}
             endpoint: {{ .Values.db.backup.endpoint }}
