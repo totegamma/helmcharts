@@ -48,7 +48,7 @@ data:
 
       # Auth
       user: {{ .Values.db.username }}
-      pass: {{ .Values.db.password }}
+      pass: {{ .Values.db.password | quote }}
 
       # Whether disable Caching queries
       #disableCache: true
