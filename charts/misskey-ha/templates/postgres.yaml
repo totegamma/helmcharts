@@ -18,4 +18,5 @@ spec:
           requests:
             storage: {{ .Values.db.storageSize }}
   backups:
-    repos: []
+    pgbackrest:
+      repos: []
