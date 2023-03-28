@@ -17,3 +17,5 @@ spec:
         resources:
           requests:
             storage: {{ .Values.db.storageSize }}
+  backups:
+    repos: []
