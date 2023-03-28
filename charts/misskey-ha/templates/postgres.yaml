@@ -7,7 +7,6 @@ spec:
   port: {{ .Values.db.port }}
   users:
     - name: {{ .Values.db.username }}
-      password: {{ .Values.db.password }}
   instances:
     - name: {{ .Values.db.hostname }}
       replicas: {{ .Values.db.replicas }}
