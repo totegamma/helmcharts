@@ -17,6 +17,10 @@ db:
   storageSize: '1Gi'
   username: 'misskey-user'
   password: 'misskey-pass'
+  backup:
+    bucket: ''
+    endpoint: ''
+    region: ''
 
 redis:
   hostname: 'misskey-redis'

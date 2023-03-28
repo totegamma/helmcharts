@@ -19,4 +19,9 @@ spec:
             storage: {{ .Values.db.storageSize }}
   backups:
     pgbackrest:
-      repos: []
+      repos:
+        - name: s3
+          s3:
+            bucket: {{ .Values.db.backup.bucket }}
+            endpoint: {{ .Values.db.backup.endpoint }}
+            region: {{ .Values.db.backup.region }}
