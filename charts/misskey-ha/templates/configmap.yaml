@@ -40,7 +40,7 @@ data:
     #───┘ PostgreSQL configuration └────────────────────────────────
 
     db:
-      host: {{ .Values.db.hostname }}
+      host: {{ .Values.db.hostname }}-ha
       port: {{ .Values.db.port }}
 
       # Database name
@@ -54,8 +54,8 @@ data:
       #disableCache: true
 
       # Extra Connection options
-      #extra:
-      #  ssl: true
+      extra:
+        ssl: true
 
     #   ┌─────────────────────┐
     #───┘ Redis configuration └─────────────────────────────────────

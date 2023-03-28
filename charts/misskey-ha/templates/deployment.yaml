@@ -18,6 +18,8 @@ spec:
         env:
           - name: NODE_ENV
             value: {{ .Values.web.NODE_ENV | quote }}
+          - name: NODE_TLS_REJECT_UNAUTHORIZED
+            value: "0"
         ports:
           - containerPort: {{ .Values.web.port }}
         imagePullPolicy: Always

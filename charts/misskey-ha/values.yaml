@@ -9,6 +9,7 @@ web:
   NODE_ENV: 'production'
 
 db:
+  name: 'misskey'
   hostname: 'misskey-db'
   port: 5432
   postgresVersion: 15
