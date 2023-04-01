@@ -27,8 +27,8 @@ spec:
             endpoint: {{ .Values.db.backup.endpoint }}
             region: {{ .Values.db.backup.region }}
           schedules:
-            full: {{ .Values.db.backup.schedules.full }}
-            differential: {{ .Values.db.backup.schedules.differential }}
+            full: {{ .Values.db.backup.schedules.full | quote }}
+            differential: {{ .Values.db.backup.schedules.differential | quote }}
       manual:
         repoName: repo1
         options:
