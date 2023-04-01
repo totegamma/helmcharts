@@ -2,5 +2,5 @@ apiVersion: v2
 appVersion: "0.1"
 description: A Helm chart for misskey with high availability settings
 name: misskey-ha
-version: 0.0.13
+version: 0.0.14
 
