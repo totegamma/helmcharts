@@ -20,6 +20,9 @@ spec:
             storage: {{ .Values.db.storageSize }}
   backups:
     pgbackrest:
+      configuration:
+      - secret:
+          name: {{ .Values.db.hostname }}-pgbackrest-secret
       repos:
         - name: repo1
           s3:
