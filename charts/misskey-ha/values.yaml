@@ -19,9 +19,14 @@ db:
   username: 'misskey-user'
   password: 'misskey-pass'
   backup:
-    bucket: ''
-    endpoint: ''
-    region: ''
+    bucket: '<YOUR_AWS_S3_BUCKET_NAME>'
+    endpoint: '<YOUR_AWS_S3_ENDPOINT>'
+    region: '<YOUR_AWS_S3_REGION>'
+    accesskeyid: '<YOUR_AWS_S3_KEY>'
+    secretaccesskey: '<YOUR_AWS_S3_KEY_SECRET>'
+    schedules:
+      full: "0 20 * * *"
+      differential: "*/6 20 * * *"
 
 redis:
   hostname: 'misskey-redis'
