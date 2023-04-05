@@ -22,6 +22,7 @@ redis:
   hostname: 'misskey-redis'
   port: 6379
   image: 'redis:7-alpine'
+  dataStorageSize: '1Gi'
 
 backup:
   enabled: true

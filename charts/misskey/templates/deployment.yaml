@@ -78,6 +78,13 @@ spec:
               - ping
           initialDelaySeconds: 60
           periodSeconds: 30
+        volumeMounts:
+          - name: redis-data
+            mountPath: /data
+      volumes:
+        - name: redis-data
+          persistentVolumeClaim:
+            claimName: redis-data
 
 ---
 apiVersion: apps/v1
