@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: misskey-config
+  name: concurrent-config
 data:
   default.yml : |-
     fqdn: {{ .Values.concurrent.fqdn }}
