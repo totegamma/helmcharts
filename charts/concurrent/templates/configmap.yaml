@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: misskey-config
+data:
+  default.yml : |-
+    fqdn: {{ .Values.concurrent.fqdn }}
+    ccaddr: {{ .Values.concurrent.ccaddr }}
+    publickey: {{ .Values.concurrent.publickey }}
+    privatekey: {{ .Values.concurrent.privatekey }}
+    dsn: {{ .Values.concurrent.dsn }}
+    redisAddr: {{ .Values.concurrent.redisAddr }}

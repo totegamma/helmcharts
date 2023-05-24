@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: concurrent
+  labels:
+    name: concurrent
+spec:
+  ports:
+  - port: 8000
+    targetPort: 80
+    protocol: TCP
+  selector:
+    name: concurrent
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+  labels:
+    name: concurrent-db
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+  selector:
+    name: concurrent-db
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  labels:
+    name: concurrent-redis
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+  selector:
+    name: concurrent-redis
+  type: ClusterIP
+
