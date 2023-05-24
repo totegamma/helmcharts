@@ -56,6 +56,11 @@ spec:
         volumeMounts:
           - name: postgres-varlib
             mountPath: /var/lib/postgresql
+      volumes:
+        - name: postgres-varlib
+          persistentVolumeClaim:
+            claimName: postgres-varlib
+
 
 ---
 apiVersion: apps/v1
@@ -82,9 +87,6 @@ spec:
           - name: redis-data
             mountPath: /data
       volumes:
-        - name: postgres-varlib
-          persistentVolumeClaim:
-            claimName: postgres-varlib
         - name: redis-data
           persistentVolumeClaim:
             claimName: redis-data
