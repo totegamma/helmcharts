@@ -24,6 +24,23 @@ spec:
             port: 8000
           initialDelaySeconds: 3
           periodSeconds: 3
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concurrent-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: concurrent-db
+  template:
+    metadata:
+      labels:
+        name: concurrent-db
+    spec:
+      containers:
       - name: posgresql
         image: postgres
         ports:
@@ -39,6 +56,23 @@ spec:
         volumeMounts:
           - name: postgres-varlib
             mountPath: /var/lib/postgresql
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concurrent-redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: concurrent-redis
+  template:
+    metadata:
+      labels:
+        name: concurrent-redis
+    spec:
+      containers:
       - name: redis
         image: redis
         ports:
