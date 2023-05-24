@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: concurrent-config
 data:
-  default.yml : |-
+  config.yaml: |-
     fqdn: {{ .Values.concurrent.fqdn }}
     ccaddr: {{ .Values.concurrent.ccaddr }}
     publickey: {{ .Values.concurrent.publickey }}
