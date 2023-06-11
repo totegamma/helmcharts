@@ -1,12 +1,14 @@
 
+server:
+  dsn: "host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable"
+  redisAddr: "redis:6379"
+
 concurrent:
   image: ghcr.io/totegamma/concurrent:master
   fqdn: example.tld
   ccaddr: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  dsn: "host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable"
-  redisAddr: "redis:6379"
   admin: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 nodeinfo:

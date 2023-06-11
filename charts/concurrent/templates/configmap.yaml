@@ -4,6 +4,10 @@ metadata:
   name: concurrent-config
 data:
   config.yaml: |-
+    server:
+      dsn: {{ .Values.concurrent.dsn }}
+      redisAddr: {{ .Values.concurrent.redisAddr }}
+
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
       ccaddr: {{ .Values.concurrent.ccaddr }}
