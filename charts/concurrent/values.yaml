@@ -7,3 +7,13 @@ concurrent:
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   dsn: "host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable"
   redisAddr: "redis:6379"
+  admin: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+nodeinfo:
+  openRegistrations: true
+  nodeName: concurrent
+  nodeDescription: concurrent
+  maintainer:
+    name: changeme
+    email: changeme@example.com
+  themeColor: "#20193b"

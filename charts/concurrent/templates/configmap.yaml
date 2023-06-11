@@ -4,9 +4,20 @@ metadata:
   name: concurrent-config
 data:
   config.yaml: |-
-    fqdn: {{ .Values.concurrent.fqdn }}
-    ccaddr: {{ .Values.concurrent.ccaddr }}
-    publickey: {{ .Values.concurrent.publickey }}
-    privatekey: {{ .Values.concurrent.privatekey }}
-    dsn: {{ .Values.concurrent.dsn }}
-    redisAddr: {{ .Values.concurrent.redisAddr }}
+    concurrent:
+      fqdn: {{ .Values.concurrent.fqdn }}
+      ccaddr: {{ .Values.concurrent.ccaddr }}
+      publickey: {{ .Values.concurrent.publickey }}
+      privatekey: {{ .Values.concurrent.privatekey }}
+      admins:
+        - {{ .Values.concurrent.admin }}
+
+    nodeinfo:
+      openRegistrations: {{ .Values.nodeinfo.openRegistrations }}
+      metadata:
+        nodeName: {{ .Values.nodeinfo.nodeName }}
+        nodeDescription: {{ .Values.nodeinfo.nodeDescription }}
+        maintainer:
+          name: {{ .Values.nodeinfo.maintainer.name }}
+          email: {{ .Values.nodeinfo.maintainer.email }}
+        themeColor: {{ .Values.nodeinfo.themeColor }}
