@@ -5,8 +5,8 @@ metadata:
 data:
   config.yaml: |-
     server:
-      dsn: {{ .Values.concurrent.dsn }}
-      redisAddr: {{ .Values.concurrent.redisAddr }}
+      dsn: {{ .Values.server.dsn }}
+      redisAddr: {{ .Values.server.redisAddr }}
 
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
