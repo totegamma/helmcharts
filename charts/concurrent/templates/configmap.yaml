@@ -27,7 +27,7 @@ data:
         maintainer:
           name: {{ .Values.nodeinfo.maintainer.name }}
           email: {{ .Values.nodeinfo.maintainer.email }}
-        themeColor: {{ .Values.nodeinfo.themeColor }}
+        themeColor: {{ .Values.nodeinfo.themeColor | quote }}
 
 ---
 apiVersion: v1

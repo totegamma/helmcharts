@@ -27,13 +27,21 @@ spec:
         volumeMounts:
           - name: concurrent-config
             mountPath: /etc/concurrent
+        volumeMounts:
+          - name: log-volume
+            mountPath: /var/log/concurrent
       - name: agent
         image: grafana/agent
         imagePullPolicy: Always
         volumeMounts:
           - name: observability-config
             mountPath: /etc/agent
+        volumeMounts:
+          - name: log-volume
+            mountPath: /var/log/concurrent
       volumes:
+        - name: log-volume
+          emptyDir: {}
         - name: concurrent-config
           configMap:
             name: concurrent-config
