@@ -7,6 +7,9 @@ data:
     server:
       dsn: {{ .Values.server.dsn }}
       redisAddr: {{ .Values.server.redisAddr }}
+      logpath: "/var/log/concurrent"
+      traceEndpoint: "localhost:4318"
+      enableTrace: true
 
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
@@ -25,3 +28,46 @@ data:
           name: {{ .Values.nodeinfo.maintainer.name }}
           email: {{ .Values.nodeinfo.maintainer.email }}
         themeColor: {{ .Values.nodeinfo.themeColor }}
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: observability-config
+data:
+  agent.yaml: |-
+    server:
+      log_level: debug
+
+    logs:
+      configs:
+        - name: default
+          positions:
+            filename: /tmp/positions.yaml
+          scrape_configs:
+            - job_name: default
+              static_configs:
+                - targets: [localhost]
+                  labels:
+                    job: accesslog
+                    __path__: /var/log/concurrent/access.log
+          clients:
+            - url: {{ .Values.observability.logs.url }}
+
+    traces:
+      configs:
+      - name: default
+        receivers:
+          otlp:
+            protocols:
+              http:
+                endpoint: 0.0.0.0:4318
+        remote_write:
+          - endpoint: {{ .Values.observability.traces.endpoint }}
+            basic_auth:
+              username: {{ .Values.observability.traces.username }}
+              password: {{ .Values.observability.traces.password }}
+        batch:
+          timeout: 5s
+          send_batch_size: 100
+

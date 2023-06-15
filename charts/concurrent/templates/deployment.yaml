@@ -27,6 +27,12 @@ spec:
         volumeMounts:
           - name: concurrent-config
             mountPath: /etc/concurrent
+      - name: agent
+        image: grafana/agent
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: observability-config
+            mountPath: /etc/agent
       volumes:
         - name: concurrent-config
           configMap:
@@ -34,6 +40,13 @@ spec:
             items:
             - key: config.yaml
               path: config.yaml
+              mode: 0644
+        - name: observability-config
+          configMap:
+            name: observability-config
+            items:
+            - key: agent.yaml
+              path: agent.yaml
               mode: 0644
 
 ---

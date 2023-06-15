@@ -19,3 +19,12 @@ nodeinfo:
     name: changeme
     email: changeme@example.com
   themeColor: "#20193b"
+
+observability:
+  logs:
+    url: ""
+  traces:
+    endpoint: ""
+    password: ""
+    username: ""
+
