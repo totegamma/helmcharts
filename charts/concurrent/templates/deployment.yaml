@@ -27,7 +27,6 @@ spec:
         volumeMounts:
           - name: concurrent-config
             mountPath: /etc/concurrent
-        volumeMounts:
           - name: log-volume
             mountPath: /var/log/concurrent
       - name: agent
@@ -36,7 +35,6 @@ spec:
         volumeMounts:
           - name: observability-config
             mountPath: /etc/agent
-        volumeMounts:
           - name: log-volume
             mountPath: /var/log/concurrent
       volumes:
