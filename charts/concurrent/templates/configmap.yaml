@@ -7,7 +7,7 @@ data:
     server:
       dsn: {{ .Values.server.dsn }}
       redisAddr: {{ .Values.server.redisAddr }}
-      logpath: "/var/log/concurrent"
+      logPath: "/var/log/concurrent"
       traceEndpoint: "localhost:4318"
       enableTrace: true
 
