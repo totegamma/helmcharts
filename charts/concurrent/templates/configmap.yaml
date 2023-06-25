@@ -34,7 +34,7 @@ data:
       description: {{ .Values.profile.description }}
       logo: {{ .Values.profile.logo }}
       wordmark: {{ .Values.profile.wordmark }}
-      rules: {{ .Values.profile.rules | toYaml | nindent 8 }}
+      rules: {{ .Values.profile.rules | toYaml | indent 6 }}
       tosURL: {{ .Values.profile.tosURL }}
 
 ---
