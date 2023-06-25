@@ -34,7 +34,8 @@ data:
       description: {{ .Values.profile.description }}
       logo: {{ .Values.profile.logo }}
       wordmark: {{ .Values.profile.wordmark }}
-      rules: {{ .Values.profile.rules | toYaml | nindent 3 }}
+      rules: |-
+        {{ .Values.profile.rules | toYaml | nindent 4 }}
       tosURL: {{ .Values.profile.tosURL }}
 
 ---
