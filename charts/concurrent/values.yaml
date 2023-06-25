@@ -28,3 +28,17 @@ observability:
     password: ""
     username: ""
 
+profile:
+  nickname: concurrent-domain
+  description: domain description
+  logo: ''
+  wordmark: ''
+  rules: |
+    - リスペクトを持って接しましょう
+      Treat everyone with respect
+    - スパムは禁止です
+      No spamming
+    - 攻撃的なプロフィール名・画像はやめましょう
+      No offensive names and profile pictures
+  tosURL: ''
+

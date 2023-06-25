@@ -29,6 +29,14 @@ data:
           email: {{ .Values.nodeinfo.maintainer.email }}
         themeColor: {{ .Values.nodeinfo.themeColor | quote }}
 
+    profile:
+      nickname: {{ .Values.profile.nickname }}
+      description: {{ .Values.profile.description }}
+      logo: {{ .Values.profile.logo }}
+      wordmark: {{ .Values.profile.wordmark }}
+      rules: {{ .Values.profile.rules | toYaml | nindent 3 }}
+      tosURL: {{ .Values.profile.tosURL }}
+
 ---
 apiVersion: v1
 kind: ConfigMap
