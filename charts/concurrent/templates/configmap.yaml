@@ -47,6 +47,21 @@ data:
     server:
       log_level: debug
 
+    metrics:
+      configs:
+        - name: default
+          scrape_configs:
+          - job_name: "concurrent"
+            static_configs:
+              - targets:
+                - "concurrent:80"
+
+          remote_write:
+            - url: {{ .Values.observability.logs.url }}
+              basic_auth:
+                username: {{ .Values.observability.metrics.username }}
+                password: {{ .Values.observability.metrics.password }}
+
     logs:
       configs:
         - name: default

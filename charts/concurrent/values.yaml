@@ -21,6 +21,10 @@ nodeinfo:
   themeColor: "#20193b"
 
 observability:
+  metrics:
+    endpoint: ""
+    password: ""
+    username: ""
   logs:
     url: ""
   traces:
