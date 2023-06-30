@@ -53,11 +53,13 @@ data:
           scrape_configs:
           - job_name: "concurrent"
             static_configs:
-              - targets:
-                - "concurrent:80"
+              - targets: ["concurrent:80"]
+                labels:
+                  instance: {{ .Values.concurrent.fqdn | quote }}
+
 
           remote_write:
-            - url: {{ .Values.observability.logs.url }}
+            - url: {{ .Values.observability.metrics.url }}
               basic_auth:
                 username: {{ .Values.observability.metrics.username }}
                 password: {{ .Values.observability.metrics.password }}
@@ -72,6 +74,7 @@ data:
               static_configs:
                 - targets: [localhost]
                   labels:
+                    instance: {{ .Values.concurrent.fqdn | quote }}
                     job: accesslog
                     __path__: /var/log/concurrent/access.log
           clients:

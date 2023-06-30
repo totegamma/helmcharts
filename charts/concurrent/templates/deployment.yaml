@@ -33,8 +33,9 @@ spec:
         image: grafana/agent
         imagePullPolicy: Always
         volumeMounts:
-          - name: observability-config
-            mountPath: /etc/agent
+          - mountPath: /etc/agent/agent.yaml
+            name: observability-config
+            subPath: agent.yaml
           - name: log-volume
             mountPath: /var/log/concurrent
       volumes:
