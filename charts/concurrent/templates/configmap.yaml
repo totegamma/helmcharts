@@ -56,10 +56,8 @@ data:
               - targets: ["concurrent:80"]
                 labels:
                   instance: {{ .Values.concurrent.fqdn | quote }}
-
-
           remote_write:
-            - url: {{ .Values.observability.metrics.url }}
+            - url: {{ .Values.observability.metrics.endpoint }}
               basic_auth:
                 username: {{ .Values.observability.metrics.username }}
                 password: {{ .Values.observability.metrics.password }}
