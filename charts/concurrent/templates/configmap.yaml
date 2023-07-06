@@ -13,29 +13,24 @@ data:
 
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
+      registration: {{ .Values.concurrent.registration }}
       ccaddr: {{ .Values.concurrent.ccaddr }}
       publickey: {{ .Values.concurrent.publickey }}
       privatekey: {{ .Values.concurrent.privatekey }}
       admins:
         - {{ .Values.concurrent.admin }}
 
-    nodeinfo:
-      openRegistrations: {{ .Values.nodeinfo.openRegistrations }}
-      metadata:
-        nodeName: {{ .Values.nodeinfo.nodeName }}
-        nodeDescription: {{ .Values.nodeinfo.nodeDescription }}
-        maintainer:
-          name: {{ .Values.nodeinfo.maintainer.name }}
-          email: {{ .Values.nodeinfo.maintainer.email }}
-        themeColor: {{ .Values.nodeinfo.themeColor | quote }}
-
     profile:
       nickname: {{ .Values.profile.nickname }}
       description: {{ .Values.profile.description }}
       logo: {{ .Values.profile.logo }}
       wordmark: {{ .Values.profile.wordmark }}
+      themeColor: {{ .Values.profile.themeColor | quote }}
       rules: {{ .Values.profile.rules | toYaml | indent 6 }}
       tosURL: {{ .Values.profile.tosURL }}
+      maintainerName: {{ .Values.profile.maintainer.name }}
+      maintainerEmail: {{ .Values.profile.maintainer.email }}
+
 
 ---
 apiVersion: v1

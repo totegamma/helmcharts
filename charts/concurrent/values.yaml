@@ -6,19 +6,11 @@ server:
 concurrent:
   image: ghcr.io/totegamma/concurrent:master
   fqdn: example.tld
+  registration: close
   ccaddr: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   admin: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
-nodeinfo:
-  openRegistrations: true
-  nodeName: concurrent
-  nodeDescription: concurrent
-  maintainer:
-    name: changeme
-    email: changeme@example.com
-  themeColor: "#20193b"
 
 observability:
   metrics:
@@ -37,6 +29,7 @@ profile:
   description: domain description
   logo: ''
   wordmark: ''
+  themeColor: "#20193b"
   rules: |
     - リスペクトを持って接しましょう
       Treat everyone with respect
@@ -45,4 +38,6 @@ profile:
     - 攻撃的なプロフィール名・画像はやめましょう
       No offensive names and profile pictures
   tosURL: ''
+  name: changeme
+  email: changeme@example.com
 
