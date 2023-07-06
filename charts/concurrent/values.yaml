@@ -6,7 +6,7 @@ server:
 concurrent:
   image: ghcr.io/totegamma/concurrent:master
   fqdn: example.tld
-  registration: close
+  registration: invite
   ccaddr: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -38,6 +38,6 @@ profile:
     - 攻撃的なプロフィール名・画像はやめましょう
       No offensive names and profile pictures
   tosURL: ''
-  name: changeme
-  email: changeme@example.com
+  maintainerName: changeme
+  maintainerEmail: changeme@example.com
 

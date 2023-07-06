@@ -28,8 +28,8 @@ data:
       themeColor: {{ .Values.profile.themeColor | quote }}
       rules: {{ .Values.profile.rules | toYaml | indent 6 }}
       tosURL: {{ .Values.profile.tosURL }}
-      maintainerName: {{ .Values.profile.maintainer.name }}
-      maintainerEmail: {{ .Values.profile.maintainer.email }}
+      maintainerName: {{ .Values.profile.maintainerName }}
+      maintainerEmail: {{ .Values.profile.maintainerEmail }}
 
 
 ---
