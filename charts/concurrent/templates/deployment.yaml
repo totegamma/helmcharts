@@ -1,20 +1,89 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: concurrent
+  name: ccgateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: concurrent
+      name: ccgateway
   template:
     metadata:
       labels:
-        name: concurrent
+        name: ccgateway
     spec:
       containers:
-      - name: concurrent
-        image: {{ .Values.concurrent.image }}
+      - name: ccgateway
+        image: {{ .Values.ccgateway.image }}
+        ports:
+          - containerPort: 8000
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        volumeMounts:
+          - name: concurrent-config
+            mountPath: /etc/concurrent
+          - name: gateway-config
+            mountPath: /etc/concurrent
+          - name: log-volume
+            mountPath: /var/log/ccgateway
+      - name: agent
+        image: grafana/agent
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /etc/agent/agent.yaml
+            name: observability-config
+            subPath: agent.yaml
+          - name: log-volume
+            mountPath: /var/log/ccgateway
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+        - name: concurrent-config
+          configMap:
+            name: concurrent-config
+            items:
+            - key: config.yaml
+              path: config.yaml
+              mode: 0644
+        - name: gateway-config
+          configMap:
+            name: gateway-config
+            items:
+            - key: gateway.yaml
+              path: gateway.yaml
+              mode: 0644
+        - name: observability-config
+          configMap:
+            name: observability-config
+            items:
+            - key: agent.yaml
+              path: agent.yaml
+              mode: 0644
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ccapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ccapi
+  template:
+    metadata:
+      labels:
+        name: ccapi
+    spec:
+      containers:
+      - name: ccapi
+        image: {{ .Values.ccapi.image }}
         ports:
           - containerPort: 8000
         imagePullPolicy: Always
@@ -28,7 +97,7 @@ spec:
           - name: concurrent-config
             mountPath: /etc/concurrent
           - name: log-volume
-            mountPath: /var/log/concurrent
+            mountPath: /var/log/ccapi
       - name: agent
         image: grafana/agent
         imagePullPolicy: Always
@@ -37,7 +106,7 @@ spec:
             name: observability-config
             subPath: agent.yaml
           - name: log-volume
-            mountPath: /var/log/concurrent
+            mountPath: /var/log/ccapi
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -57,6 +126,96 @@ spec:
               mode: 0644
 
 ---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ccactivitypub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ccactivitypub
+  template:
+    metadata:
+      labels:
+        name: ccactivitypub
+    spec:
+      containers:
+      - name: ccactivitypub
+        image: {{ .Values.ccactivitypub.image }}
+        ports:
+          - containerPort: 8000
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+        volumeMounts:
+          - name: concurrent-config
+            mountPath: /etc/concurrent
+          - name: log-volume
+            mountPath: /var/log/ccactivitypub
+      - name: agent
+        image: grafana/agent
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /etc/agent/agent.yaml
+            name: observability-config
+            subPath: agent.yaml
+          - name: log-volume
+            mountPath: /var/log/ccactivitypub
+      volumes:
+        - name: log-volume
+          emptyDir: {}
+        - name: concurrent-config
+          configMap:
+            name: concurrent-config
+            items:
+            - key: config.yaml
+              path: config.yaml
+              mode: 0644
+        - name: observability-config
+          configMap:
+            name: observability-config
+            items:
+            - key: agent.yaml
+              path: agent.yaml
+              mode: 0644
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ccwebui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: ccwebui
+  template:
+    metadata:
+      labels:
+        name: ccwebui
+    spec:
+      containers:
+      - name: ccwebui
+        image: {{ .Values.ccwebui.image }}
+        ports:
+          - containerPort: 8000
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 3
+          periodSeconds: 3
+
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -92,8 +251,8 @@ spec:
           persistentVolumeClaim:
             claimName: postgres-varlib
 
-
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:

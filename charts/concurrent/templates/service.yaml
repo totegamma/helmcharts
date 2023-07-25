@@ -1,17 +1,65 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: concurrent
+  name: ccgateway
   labels:
-    name: concurrent
+    name: ccgateway
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    name: ccgateway
+  type: LoadBalancer
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ccapi
+  labels:
+    name: ccapi
 spec:
   ports:
   - port: 80
     targetPort: 8000
     protocol: TCP
   selector:
-    name: concurrent
-  type: LoadBalancer
+    name: ccapi
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ccactivitypub
+  labels:
+    name: ccactivitypub
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    name: ccactivitypub
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ccwebui
+  labels:
+    name: ccwebui
+spec:
+  ports:
+  - port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    name: ccwebui
+  type: ClusterIP
 
 ---
 apiVersion: v1

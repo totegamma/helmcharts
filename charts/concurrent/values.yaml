@@ -4,13 +4,24 @@ server:
   redisAddr: "redis:6379"
 
 concurrent:
-  image: ghcr.io/totegamma/concurrent:master
   fqdn: example.tld
   registration: invite
   ccaddr: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   admin: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+ccgateway:
+  image: ghcr.io/totegamma/ccgateway:master
+
+ccapi:
+  image: ghcr.io/totegamma/ccapi:master
+
+ccactivitypub:
+  image: ghcr.io/totegamma/ccactivitypub:master
+
+ccwebui:
+  image: ghcr.io/totegamma/ccwebui:master
 
 observability:
   metrics:
