@@ -80,12 +80,12 @@ spec:
       - name: ccapi
         image: {{ .Values.ccapi.image }}
         ports:
-          - containerPort: 8000
+          - containerPort: 8080
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
             path: /health
-            port: 8000
+            port: 8080
           initialDelaySeconds: 3
           periodSeconds: 3
         volumeMounts:
@@ -200,14 +200,8 @@ spec:
       - name: ccwebui
         image: {{ .Values.ccwebui.image }}
         ports:
-          - containerPort: 8000
+          - containerPort: 80
         imagePullPolicy: Always
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 8000
-          initialDelaySeconds: 3
-          periodSeconds: 3
 
 ---
 
