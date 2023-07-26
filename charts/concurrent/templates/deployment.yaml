@@ -46,9 +46,12 @@ spec:
           projected:
             sources:
               - configMap:
-                name: concurrent-config
-              - configMap:
-                name: gateway-config
+                name: settings
+                items:
+                  - key: concurrent-config
+                    path: config.yaml
+                  - key: gateway-config
+                    path: gateway.yaml
         - name: observability-config
           configMap:
             name: observability-config
