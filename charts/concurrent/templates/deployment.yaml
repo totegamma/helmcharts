@@ -207,8 +207,8 @@ spec:
         imagePullPolicy: Always
         livenessProbe:
           httpGet:
-            path: /web
-            port: index.html
+            path: /web/index.html
+            port: 80
           initialDelaySeconds: 3
           periodSeconds: 3
 
