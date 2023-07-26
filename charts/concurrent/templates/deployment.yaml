@@ -27,8 +27,7 @@ spec:
         volumeMounts:
           - name: concurrent-config
             mountPath: /etc/concurrent
-          - name: gateway-config
-            mountPath: /etc/concurrent
+            readOnly: true
           - name: log-volume
             mountPath: /var/log/ccgateway
       - name: agent
@@ -44,19 +43,12 @@ spec:
         - name: log-volume
           emptyDir: {}
         - name: concurrent-config
-          configMap:
-            name: concurrent-config
-            items:
-            - key: config.yaml
-              path: config.yaml
-              mode: 0644
-        - name: gateway-config
-          configMap:
-            name: gateway-config
-            items:
-            - key: gateway.yaml
-              path: gateway.yaml
-              mode: 0644
+          projected:
+            sources:
+              - configMap:
+                name: concurrent-config
+              - configMap:
+                name: gateway-config
         - name: observability-config
           configMap:
             name: observability-config
