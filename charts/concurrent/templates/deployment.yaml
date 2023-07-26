@@ -29,7 +29,7 @@ spec:
             mountPath: /etc/concurrent
             readOnly: true
           - name: log-volume
-            mountPath: /var/log/ccgateway
+            mountPath: /var/log/concurrent
       - name: agent
         image: grafana/agent
         imagePullPolicy: Always
@@ -38,7 +38,7 @@ spec:
             name: observability-config
             subPath: agent.yaml
           - name: log-volume
-            mountPath: /var/log/ccgateway
+            mountPath: /var/log/concurrent
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -48,12 +48,12 @@ spec:
               - configMap:
                   name: concurrent-config
                   items:
-                    - key: concurrent-config
+                    - key: config.yaml
                       path: config.yaml
               - configMap:
                   name: gateway-config
                   items:
-                    - key: gateway-config
+                    - key: gateway.yaml
                       path: gateway.yaml
         - name: observability-config
           configMap:
@@ -95,7 +95,7 @@ spec:
           - name: concurrent-config
             mountPath: /etc/concurrent
           - name: log-volume
-            mountPath: /var/log/ccapi
+            mountPath: /var/log/concurrent
       - name: agent
         image: grafana/agent
         imagePullPolicy: Always
@@ -104,7 +104,7 @@ spec:
             name: observability-config
             subPath: agent.yaml
           - name: log-volume
-            mountPath: /var/log/ccapi
+            mountPath: /var/log/concurrent
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -155,7 +155,7 @@ spec:
           - name: concurrent-config
             mountPath: /etc/concurrent
           - name: log-volume
-            mountPath: /var/log/ccactivitypub
+            mountPath: /var/log/concurrent
       - name: agent
         image: grafana/agent
         imagePullPolicy: Always
@@ -164,7 +164,7 @@ spec:
             name: observability-config
             subPath: agent.yaml
           - name: log-volume
-            mountPath: /var/log/ccactivitypub
+            mountPath: /var/log/concurrent
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -205,6 +205,12 @@ spec:
         ports:
           - containerPort: 80
         imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /web
+            port: index.html
+          initialDelaySeconds: 3
+          periodSeconds: 3
 
 ---
 

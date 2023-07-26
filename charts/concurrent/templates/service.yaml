@@ -22,7 +22,7 @@ metadata:
     name: ccapi
 spec:
   ports:
-  - port: 80
+  - port: 8000
     targetPort: 8000
     protocol: TCP
   selector:
@@ -38,8 +38,8 @@ metadata:
     name: ccactivitypub
 spec:
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: 8000
+    targetPort: 8000
     protocol: TCP
   selector:
     name: ccactivitypub
@@ -55,7 +55,7 @@ metadata:
 spec:
   ports:
   - port: 80
-    targetPort: 8080
+    targetPort: 80
     protocol: TCP
   selector:
     name: ccwebui
