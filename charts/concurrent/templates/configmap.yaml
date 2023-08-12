@@ -14,7 +14,7 @@ data:
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
       registration: {{ .Values.concurrent.registration }}
-      ccaddr: {{ .Values.concurrent.ccaddr }}
+      ccid: {{ .Values.concurrent.ccid }}
       publickey: {{ .Values.concurrent.publickey }}
       privatekey: {{ .Values.concurrent.privatekey }}
       admins:
@@ -96,8 +96,8 @@ data:
                 - targets: [localhost]
                   labels:
                     instance: {{ .Values.concurrent.fqdn | quote }}
-                    job: accesslog
-                    __path__: /var/log/concurrent/access.log
+                    job: applog
+                    __path__: /var/log/concurrent/*.log
           clients:
             - url: {{ .Values.observability.logs.url }}
 

@@ -6,7 +6,7 @@ server:
 concurrent:
   fqdn: example.tld
   registration: invite
-  ccaddr: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  ccid: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   admin: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
