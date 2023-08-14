@@ -10,6 +10,8 @@ data:
       logPath: "/var/log/concurrent"
       traceEndpoint: "localhost:4318"
       enableTrace: true
+      captchaSitekey: {{ .Values.server.captchaSitekey }}
+      captchaSecret: {{ .Values.server.captchaSecret }}
 
     concurrent:
       fqdn: {{ .Values.concurrent.fqdn }}
@@ -17,8 +19,6 @@ data:
       ccid: {{ .Values.concurrent.ccid }}
       publickey: {{ .Values.concurrent.publickey }}
       privatekey: {{ .Values.concurrent.privatekey }}
-      admins:
-        - {{ .Values.concurrent.admin }}
 
     profile:
       nickname: {{ .Values.profile.nickname }}
