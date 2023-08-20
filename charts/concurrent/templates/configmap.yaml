@@ -65,7 +65,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: gateway-config
+  name: activitypub-config
 data:
   activitypub.yaml: |-
     workerPrivateKey: {{ .Values.activitypub.privatekey }}
