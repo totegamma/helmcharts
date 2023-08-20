@@ -61,6 +61,17 @@ data:
         preservePath: true
 
 ---
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gateway-config
+data:
+  activitypub.yaml: |-
+    workerPrivateKey: {{ .Values.activitypub.privatekey }}
+
+---
+
 apiVersion: v1
 kind: ConfigMap
 metadata:

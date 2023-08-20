@@ -169,12 +169,18 @@ spec:
         - name: log-volume
           emptyDir: {}
         - name: concurrent-config
-          configMap:
-            name: concurrent-config
-            items:
-            - key: config.yaml
-              path: config.yaml
-              mode: 0644
+          projected:
+            sources:
+              - configMap:
+                  name: concurrent-config
+                  items:
+                    - key: config.yaml
+                      path: config.yaml
+              - configMap:
+                  name: activitypub-config
+                  items:
+                    - key: activitypub.yaml
+                      path: activitypub.yaml
         - name: observability-config
           configMap:
             name: observability-config
