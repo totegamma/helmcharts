@@ -61,7 +61,7 @@ data:
         preservePath: true
 {{- if (index .Values "url-summary" "enabled") }}
       - name: url-summary
-        host: url-summary
+        host: url-summary-lb
         port: {{ (index .Values "url-summary" "LB_LISTEN_PORT") }}
         path: /summary
 {{- end }}
