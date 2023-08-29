@@ -49,6 +49,7 @@ data:
         host: ccapi
         port: 8000
         path: /api/v1
+        injectCors: true
       - name: activitypub
         host: ccactivitypub
         port: 8000
