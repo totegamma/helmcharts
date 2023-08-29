@@ -27,6 +27,11 @@ ccactivitypub:
 ccwebui:
   image: ghcr.io/totegamma/ccwebui:master
 
+url-summary:
+  enabled: true
+  PORT: 8080
+  CORS: ""
+
 observability:
   metrics:
     endpoint: ""

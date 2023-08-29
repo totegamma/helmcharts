@@ -59,6 +59,12 @@ data:
         port: 8000
         path: /.well-known
         preservePath: true
+{{ if .Values.url-summary.enabled }}
+      - name: summaryproxy
+        host: summary
+        port: {{ .Values.url-summary.PORT }}
+        path: /summary
+{{ end }}
 
 ---
 

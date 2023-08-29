@@ -2,4 +2,10 @@ apiVersion: v2
 appVersion: "0.0.0"
 description: A Helm chart for concurrent
 name: concurrent
-version: 0.1.12
+version: 0.1.13
+dependencies:
+  - name: url-summary
+    version: "0.0.*"
+    repository: https://rassi0429.github.io/helmcharts/
+    condition: url-summary.enabled
+
