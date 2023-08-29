@@ -32,6 +32,7 @@ url-summary:
   LB_LISTEN_PORT: 80
   APP_TARGET_PORT: 8080
   CORS: ""
+  LB_TYPE: ClusterIP
 
 observability:
   metrics:
