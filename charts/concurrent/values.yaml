@@ -29,7 +29,8 @@ ccwebui:
 
 url-summary:
   enabled: true
-  PORT: 8080
+  LB_LISTEN_PORT: 80
+  APP_TARGET_PORT: 8080
   CORS: ""
 
 observability:

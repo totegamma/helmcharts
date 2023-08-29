@@ -59,13 +59,12 @@ data:
         port: 8000
         path: /.well-known
         preservePath: true
-{{ if (index .Values "url-summary" "enabled") }}
-      - name: summaryproxy
-        host: summary
-        port: {{ (index .Values "url-summary" "PORT") }}
+{{- if (index .Values "url-summary" "enabled") }}
+      - name: url-summary
+        host: url-summary
+        port: {{ (index .Values "url-summary" "LB_LISTEN_PORT") }}
         path: /summary
-{{ end }}
-
+{{- end }}
 ---
 
 apiVersion: v1
