@@ -14,7 +14,7 @@ concurrent:
 
 activitypub:
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  notificationstream: xxxxxxxxxxxxxxxxxxxx@example.tld
+  notificationStream: xxxxxxxxxxxxxxxxxxxx@example.tld
 
 ccgateway:
   image: ghcr.io/totegamma/ccgateway:master
