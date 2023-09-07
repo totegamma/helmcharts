@@ -55,6 +55,7 @@ data:
         port: 8000
         path: /ap
         preservePath: true
+        injectCors: true
       - name: webfinger
         host: ccactivitypub
         port: 8000
@@ -74,7 +75,9 @@ metadata:
   name: activitypub-config
 data:
   activitypub.yaml: |-
-    workerPrivateKey: {{ .Values.activitypub.privatekey }}
+    proxy:
+      privateKey: {{ .Values.activitypub.privatekey }}
+      notificationStream: {{ .Values.activitypub.notificationStream }}
 
 ---
 
