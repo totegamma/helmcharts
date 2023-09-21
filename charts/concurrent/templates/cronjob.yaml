@@ -1,0 +1,32 @@
+{{ if .Values.backup.enabled }}
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: db-backup
+spec:
+  schedule: {{ .Values.backup.cron | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: swissknife
+            image: ghcr.io/totegamma/swissknife:master
+            env:
+            - name: PGPASSWORD
+              value: {{ .Values.db.password | quote }}
+            - name: AWS_ACCESS_KEY_ID
+              value: {{ .Values.backup.aws_access_key_id | quote }}
+            - name: AWS_SECRET_ACCESS_KEY
+              value: {{ .Values.backup.aws_secret_access_key | quote }}
+            - name: AWS_DEFAULT_REGION
+              value: {{ .Values.backup.aws_default_region | quote }}
+            command:
+            - /bin/bash
+            - -cx
+            - |
+              pg_dump -Fc -d concurrent -h db -U  > db-concurrent.dump
+              zip concurrent.dump.zip concurrent.dump
+              aws s3 sync . {{ .Values.backup.s3key }} --exclude "*" --include "*.zip"
+          restartPolicy: Never
+{{ end }}

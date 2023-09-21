@@ -64,3 +64,12 @@ profile:
   maintainerName: changeme
   maintainerEmail: changeme@example.com
 
+
+backup:
+  enabled: true
+  cron: '* 20 * * *'
+  s3key: 's3://examplebucket/'
+  aws_access_key_id: ''
+  aws_secret_access_key: ''
+  aws_default_region: 'ap-northeast-1'
+
