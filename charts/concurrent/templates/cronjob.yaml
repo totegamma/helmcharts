@@ -26,7 +26,7 @@ spec:
             - -cx
             - |
               pg_dump -Fc -d concurrent -h db -U  > db-concurrent.dump
-              zip concurrent.dump.zip concurrent.dump
+              zip concurrent.dump.zip db-concurrent.dump
               aws s3 sync . {{ .Values.backup.s3key }} --exclude "*" --include "*.zip"
           restartPolicy: Never
 {{ end }}
