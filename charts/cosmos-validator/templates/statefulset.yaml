@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cosmos-seed
+spec:
+  selector:
+    matchLabels:
+      app: cosmos-seed
+  serviceName: "cosmos-seed"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cosmos-seed
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: cosmos
+        image: {{ .Values.seed.image }}
+        volumeMounts:
+        - name: data
+          mountPath: /opt/data
+        ports:
+          - containerPort: 1317
+            name: api
+          - containerPort: 8080
+            name: rosetta
+          - containerPort: 9090
+            name: grpc
+          - containerPort: 26657
+            name: rpc
+          - containerPort: 9091
+            name: grpc-web
+        command:
+          - sh
+          - -c
+          - |
+            {{ .Values.seed.binaryName }} start --home /opt/data/cosmos
+      initContainers:
+      - name: init-seed
+        image: golang
+        volumeMounts:
+        - name: data
+          mountPath: /opt/data
+        resources:
+          limits:
+            cpu: 1000m
+            ephemeral-storage: 10Gi
+            memory: 2Gi
+          requests:
+            cpu: 500m
+            ephemeral-storage: 10Gi
+            memory: 2Gi
+        command:
+          - bash
+          - -cx
+          - |
+            if [ -d /opt/data/cosmos ]; then
+              exit 0;
+            fi
+            curl 'https://get.ignite.com/cli@'{{ .Values.ignite.version }}! | bash
+            mkdir work
+            cd work
+            git clone {{ .Values.seed.repositoryURL }} .
+            ignite chain init --home /opt/data/cosmos
+
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+

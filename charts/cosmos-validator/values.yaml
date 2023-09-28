@@ -1,0 +1,10 @@
+
+
+ignite:
+  version: "v0.27.1"
+
+seed:
+  image: ghcr.io/mycel-domain/mycel:main
+  repositoryURL: https://github.com/mycel-domain/mycel.git
+  binaryName: myceld
+
