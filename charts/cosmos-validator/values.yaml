@@ -1,5 +1,4 @@
 
-
 ignite:
   version: "v0.27.1"
 
@@ -7,4 +6,9 @@ seed:
   image: ghcr.io/mycel-domain/mycel:main
   repositoryURL: https://github.com/mycel-domain/mycel.git
   binaryName: myceld
+
+ingress:
+  enable: true
+  lcd_endpoint: lcd.example.com
+  rpc_endpoint: rpc.example.com
 
