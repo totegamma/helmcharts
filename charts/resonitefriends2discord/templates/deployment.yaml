@@ -18,11 +18,11 @@ spec:
         imagePullPolicy: Always
         env:
           - name: USERNAME
-            value: {{ .Values.neos.username | quote }}
+            value: {{ .Values.resonite.username | quote }}
           - name: PASSWORD
-            value: {{ .Values.neos.password | quote }}
+            value: {{ .Values.resonite.password | quote }}
           - name: MACHINEID
-            value: {{ .Values.neos.machineid | quote }}
+            value: {{ .Values.resonite.machineid | quote }}
           - name: DISCORD_BOT_TOKEN
             value: {{ .Values.discord.bot_token | quote }}
           - name: DISCORD_CHANNEL_ID

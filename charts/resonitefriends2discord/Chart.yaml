@@ -2,4 +2,4 @@ apiVersion: v1
 appVersion: "0.1"
 description: A Helm chart for resonitefriends2discord
 name: resonitefriends2discord
-version: 0.0.0
+version: 0.0.1
