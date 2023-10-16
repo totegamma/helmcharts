@@ -1,0 +1,15 @@
+
+application:
+  image: ghcr.io/totegamma/resonitefriends2discord:main
+  message_prefix: ''
+
+resonite:
+    username: ''
+    password: ''
+    machineid: ''
+
+discord:
+  bot_token: ''
+  channel_id: ''
+  message_id: ''
+

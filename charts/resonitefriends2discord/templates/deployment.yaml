@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resonitefriends2discord
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: resonitefriends2discord
+  template:
+    metadata:
+      labels:
+        name: resonitefriends2discord
+    spec:
+      containers:
+      - name: resonitefriends2discord
+        image: {{ .Values.application.image | quote }}
+        imagePullPolicy: Always
+        env:
+          - name: USERNAME
+            value: {{ .Values.neos.username | quote }}
+          - name: PASSWORD
+            value: {{ .Values.neos.password | quote }}
+          - name: MACHINEID
+            value: {{ .Values.neos.machineid | quote }}
+          - name: DISCORD_BOT_TOKEN
+            value: {{ .Values.discord.bot_token | quote }}
+          - name: DISCORD_CHANNEL_ID
+            value: {{ .Values.discord.channel_id | quote }}
+          - name: DISCORD_MESSAGE_ID
+            value: {{ .Values.discord.message_id | quote }}
+          - name: MESSAGE_PREFIX
+            value: {{ .Values.application.message_prefix | quote }}
+
