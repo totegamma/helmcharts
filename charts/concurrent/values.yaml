@@ -2,14 +2,13 @@
 server:
   dsn: "host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable"
   redisAddr: "redis:6379"
+  memcachedAddr: "memcached:11211"
   captchaSitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
   captchaSecret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 
 concurrent:
   fqdn: example.tld
   registration: invite
-  ccid: CCxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  publickey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 activitypub:
