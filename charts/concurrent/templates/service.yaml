@@ -91,3 +91,18 @@ spec:
     name: concurrent-redis
   type: ClusterIP
 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: memcached
+  labels:
+    name: concurrent-memcached
+spec:
+  ports:
+  - port: 11211
+    protocol: TCP
+  selector:
+    name: concurrent-memcached
+  type: ClusterIP
+

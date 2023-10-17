@@ -239,7 +239,7 @@ spec:
         image: postgres
         ports:
           - containerPort: 5432
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         env:
           - name: POSTGRES_USER
             value: postgres
@@ -276,7 +276,7 @@ spec:
         image: redis
         ports:
           - containerPort: 6379
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         volumeMounts:
           - name: redis-data
             mountPath: /data
@@ -284,4 +284,27 @@ spec:
         - name: redis-data
           persistentVolumeClaim:
             claimName: redis-data
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concurrent-memcached
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: concurrent-memcached
+  template:
+    metadata:
+      labels:
+        name: concurrent-memcached
+    spec:
+      containers:
+      - name: memcached
+        image: memcached
+        ports:
+          - containerPort: 11211
+        imagePullPolicy: IfNotPresent
 
