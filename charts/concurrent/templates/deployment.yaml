@@ -332,7 +332,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: bucketName
-            value: {{ .Values.mediaserver.bucketname | quote }}
+            value: {{ .Values.mediaserver.bucketName | quote }}
           - name: accountId
             value: {{ .Values.mediaserver.accountId | quote }}
           - name: accessKeyId
