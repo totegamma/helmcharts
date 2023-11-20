@@ -308,3 +308,43 @@ spec:
           - containerPort: 11211
         imagePullPolicy: IfNotPresent
 
+---
+{{ if .Values.mediaserver.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mediaserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: mediaserver
+  template:
+    metadata:
+      labels:
+        name: mediaserver
+    spec:
+      containers:
+      - name: mediaserver
+        image: {{ .Values.mediaserver.image }}
+        ports:
+          - containerPort: 8000
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: bucketName
+            value: {{ .Values.mediaserver.bucketname | quote }}
+          - name: accountId
+            value: {{ .Values.mediaserver.accountId | quote }}
+          - name: accessKeyId
+            value: {{ .Values.mediaserver.accessKeyId | quote }}
+          - name: accessKeySecret
+            value: {{ .Values.mediaserver.accessKeySecret | quote }}
+          - name: publicBaseUrl
+            value: {{ .Values.mediaserver.publicBaseUrl | quote }}
+          - name: db_dsn
+            value: {{ .Values.server.dsn | quote }}
+          - name: quota
+            value: {{ .Values.mediaserver.quota | quote }}
+
+{{ end }}
+

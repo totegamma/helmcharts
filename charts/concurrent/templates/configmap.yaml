@@ -66,6 +66,12 @@ data:
         port: {{ (index .Values "url-summary" "LB_LISTEN_PORT") }}
         path: /summary
 {{- end }}
+{{- if .Values.mediaserver.enabled }}
+      - name: mediaserver
+        host: mediaserver
+        port: 8000
+        path: /storage
+{{- end}}
 ---
 
 apiVersion: v1

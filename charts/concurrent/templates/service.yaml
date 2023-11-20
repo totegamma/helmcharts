@@ -106,3 +106,20 @@ spec:
     name: concurrent-memcached
   type: ClusterIP
 
+---
+{{ if .Values.mediaserver.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: mediaserver
+  labels:
+    name: mediaserver
+spec:
+  ports:
+  - port: 8000
+    protocol: TCP
+  selector:
+    name: mediaserver
+  type: ClusterIP
+{{ end }}
+
