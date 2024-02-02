@@ -84,7 +84,7 @@ data:
       notificationStream: {{ .Values.activitypub.notificationStream }}
 
 ---
-
+{{- if .Values.monitoring.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -130,4 +130,5 @@ data:
         batch:
           timeout: 5s
           send_batch_size: 100
+{{- end }}
 

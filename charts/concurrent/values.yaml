@@ -6,6 +6,9 @@ server:
   captchaSitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
   captchaSecret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
 
+monitoring:
+  enabled: true
+
 concurrent:
   fqdn: example.tld
   registration: invite

@@ -107,6 +107,8 @@ spec:
   type: ClusterIP
 
 ---
+
+{{- if .Values.monitoring.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -118,8 +120,9 @@ spec:
   - port: 4318
     protocol: TCP
   selector:
-    name: grafana-agenet
+    name: grafana-agent
   type: ClusterIP
+{{- end }}
 
 ---
 
