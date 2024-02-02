@@ -289,13 +289,13 @@ spec:
       - name: redis-exporter
         image: oliver006/redis_exporter:v1.6.0-alpine
         imagePullPolicy: IfNotPresent
-        command:
+        args:
           - "--redis.addr=redis://redis:6379"
 
       - name: memcached-exporter
         image: prom/memcached-exporter:v0.6.0
         imagePullPolicy: IfNotPresent
-        command:
+        args:
           - '--memcached.address=memcached:11211'
 
       volumes:
