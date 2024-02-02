@@ -107,6 +107,22 @@ spec:
   type: ClusterIP
 
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana-agent
+  labels:
+    name: grafana-agent
+spec:
+  ports:
+  - port: 4318
+    protocol: TCP
+  selector:
+    name: grafana-agenet
+  type: ClusterIP
+
+---
+
 {{ if .Values.mediaserver.enabled }}
 apiVersion: v1
 kind: Service

@@ -28,20 +28,7 @@ spec:
           - name: concurrent-config
             mountPath: /etc/concurrent
             readOnly: true
-          - name: log-volume
-            mountPath: /var/log/concurrent
-      - name: agent
-        image: grafana/agent
-        imagePullPolicy: Always
-        volumeMounts:
-          - mountPath: /etc/agent/agent.yaml
-            name: observability-config
-            subPath: agent.yaml
-          - name: log-volume
-            mountPath: /var/log/concurrent
       volumes:
-        - name: log-volume
-          emptyDir: {}
         - name: concurrent-config
           projected:
             sources:
@@ -55,13 +42,6 @@ spec:
                   items:
                     - key: gateway.yaml
                       path: gateway.yaml
-        - name: observability-config
-          configMap:
-            name: observability-config
-            items:
-            - key: agent.yaml
-              path: agent.yaml
-              mode: 0644
 
 ---
 
@@ -94,33 +74,13 @@ spec:
         volumeMounts:
           - name: concurrent-config
             mountPath: /etc/concurrent
-          - name: log-volume
-            mountPath: /var/log/concurrent
-      - name: agent
-        image: grafana/agent
-        imagePullPolicy: Always
-        volumeMounts:
-          - mountPath: /etc/agent/agent.yaml
-            name: observability-config
-            subPath: agent.yaml
-          - name: log-volume
-            mountPath: /var/log/concurrent
       volumes:
-        - name: log-volume
-          emptyDir: {}
         - name: concurrent-config
           configMap:
             name: concurrent-config
             items:
             - key: config.yaml
               path: config.yaml
-              mode: 0644
-        - name: observability-config
-          configMap:
-            name: observability-config
-            items:
-            - key: agent.yaml
-              path: agent.yaml
               mode: 0644
 
 ---
@@ -156,15 +116,6 @@ spec:
             mountPath: /etc/concurrent
           - name: log-volume
             mountPath: /var/log/concurrent
-      - name: agent
-        image: grafana/agent
-        imagePullPolicy: Always
-        volumeMounts:
-          - mountPath: /etc/agent/agent.yaml
-            name: observability-config
-            subPath: agent.yaml
-          - name: log-volume
-            mountPath: /var/log/concurrent
       volumes:
         - name: log-volume
           emptyDir: {}
@@ -181,13 +132,6 @@ spec:
                   items:
                     - key: activitypub.yaml
                       path: activitypub.yaml
-        - name: observability-config
-          configMap:
-            name: observability-config
-            items:
-            - key: agent.yaml
-              path: agent.yaml
-              mode: 0644
 
 ---
 
@@ -307,6 +251,61 @@ spec:
         ports:
           - containerPort: 11211
         imagePullPolicy: IfNotPresent
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana-agent
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: grafana-agent
+  template:
+    metadata:
+      labels:
+        name: grafana-agent
+    spec:
+      containers:
+      - name: agent
+        image: grafana/agent
+        ports:
+          - containerPort: 4318
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /etc/agent/agent.yaml
+            name: observability-config
+            subPath: agent.yaml
+
+      - name: postgres-exporter
+        image: quay.io/prometheuscommunity/postgres-exporter
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: DATA_SOURCE_NAME
+            value: "postgresql://postgres:postgres@db:5432/postgres?sslmode=disable"
+
+      - name: redis-exporter
+        image: oliver006/redis_exporter:v1.6.0-alpine
+        imagePullPolicy: IfNotPresent
+        command:
+          - "--redis.addr=redis://redis:6379"
+
+      - name: memcached-exporter
+        image: prom/memcached-exporter:v0.6.0
+        imagePullPolicy: IfNotPresent
+        command:
+          - '--memcached.address=memcached:11211'
+
+      volumes:
+        - name: observability-config
+          configMap:
+            name: observability-config
+            items:
+            - key: agent.yaml
+              path: agent.yaml
+              mode: 0644
 
 ---
 {{ if .Values.mediaserver.enabled }}

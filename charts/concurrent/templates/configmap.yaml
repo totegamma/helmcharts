@@ -8,8 +8,7 @@ data:
       dsn: {{ .Values.server.dsn }}
       redisAddr: {{ .Values.server.redisAddr }}
       memcachedAddr: {{ .Values.server.memcachedAddr }}
-      logPath: "/var/log/concurrent"
-      traceEndpoint: "localhost:4318"
+      traceEndpoint: "grafana-agent:4318"
       enableTrace: true
       captchaSitekey: {{ .Values.server.captchaSitekey }}
       captchaSecret: {{ .Values.server.captchaSecret }}
@@ -101,7 +100,12 @@ data:
           scrape_configs:
           - job_name: "concurrent"
             static_configs:
-              - targets: ["concurrent:80"]
+              - targets:
+                - 'ccgateway:80'
+                - 'ccapi:8000'
+                - 'localhost:9187' # postgres-exporter
+                - 'localhost:9121' # redis-exporter
+                - 'localhost:9150' # memcached-exporter
                 labels:
                   instance: {{ .Values.concurrent.fqdn | quote }}
           remote_write:
@@ -109,22 +113,6 @@ data:
               basic_auth:
                 username: {{ .Values.observability.metrics.username }}
                 password: {{ .Values.observability.metrics.password }}
-
-    logs:
-      configs:
-        - name: default
-          positions:
-            filename: /tmp/positions.yaml
-          scrape_configs:
-            - job_name: default
-              static_configs:
-                - targets: [localhost]
-                  labels:
-                    instance: {{ .Values.concurrent.fqdn | quote }}
-                    job: applog
-                    __path__: /var/log/concurrent/*.log
-          clients:
-            - url: {{ .Values.observability.logs.url }}
 
     traces:
       configs:
