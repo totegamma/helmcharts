@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: concurrent-webhook
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: concurrent-webhook
+  template:
+    metadata:
+      labels:
+        name: concurrent-webhook
+    spec:
+      containers:
+        - name: concurrent-webhook
+          image: {{ .Values.image }}
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          env:
+            - name: PORT
+              value: {{ .Values.APP_TARGET_PORT | quote }}
+            - name: CONCURRENT_PRIVATE_KEY
+              value: {{ .Values.CONCURRENT_PRIVATE_KEY | quote }}
+            - name: CONCURRENT_HOST
+              value: {{ .Values.CONCURRENT_HOST | quote }}
+            - name: CONCURRENT_SIG
+              value: {{ .Values.CONCURRENT_SIG | quote }}
+            - name: CONFIG
+              value: {{ .Values.CONFIG | toJson | quote }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: concurrent-webhook-lb
+spec:
+  selector:
+    name: concurrent-webhook
+  ports:
+    - protocol: TCP
+      port: {{ .Values.LB_LISTEN_PORT }}
+      targetPort: {{ .Values.APP_TARGET_PORT }}
+  type: {{ .Values.LB_TYPE }}

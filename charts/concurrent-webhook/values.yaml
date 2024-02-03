@@ -1,0 +1,19 @@
+CONCURRENT_PRIVATE_KEY: 
+CONCURRENT_HOST:
+CONCURRENT_SIG:
+CONFIG:
+  webhooks:
+    - path: "/example"
+      profileOverride:
+        username: "example"
+        avatar: "http://concurrent.world/concurrent.png"
+        description: "webhook example"
+        link: "https://github.com/totegamma/concurrent-webhook"
+      postStreams: ["example-stream@example.com"]
+      template: |
+        hi im webhook <%= body.title %> :
+        <%= body.text %>
+LB_LISTEN_PORT: 80
+APP_TARGET_PORT: 8080
+LB_TYPE: LoadBalancer
+image: ghcr.io/totegamma/concurrent-webhook:latest
