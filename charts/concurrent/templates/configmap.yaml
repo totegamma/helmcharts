@@ -48,7 +48,7 @@ data:
         port: 8000
         path: /api/v1
         injectCors: true
-{{- if .Values.activitypub.enabled }}
+{{- if .Values.ccactivitypub.enabled }}
       - name: activitypub
         host: ccactivitypub
         port: 8000

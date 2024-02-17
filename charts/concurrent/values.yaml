@@ -24,7 +24,6 @@ mediaserver:
   quota: "1000000000"
 
 activitypub:
-  enabled: false
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   notificationStream: xxxxxxxxxxxxxxxxxxxx@example.tld
 
@@ -35,6 +34,7 @@ ccapi:
   image: ghcr.io/totegamma/ccapi:master
 
 ccactivitypub:
+  enabled: false
   image: ghcr.io/totegamma/ccworld-ap-bridge:latest
 
 ccwebui:

@@ -31,7 +31,7 @@ spec:
 
 ---
 
-{{- if .Values.activitypub.enabled }}
+{{- if .Values.ccactivitypub.enabled }}
 apiVersion: v1
 kind: Service
 metadata:

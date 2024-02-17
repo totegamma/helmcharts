@@ -85,7 +85,7 @@ spec:
 
 ---
 
-{{- if .Values.activitypub.enabled }}
+{{- if .Values.ccactivitypub.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
