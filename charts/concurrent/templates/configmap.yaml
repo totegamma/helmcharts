@@ -48,6 +48,7 @@ data:
         port: 8000
         path: /api/v1
         injectCors: true
+{{- if .Values.ccactivitypub.enabled }}
       - name: activitypub
         host: ccactivitypub
         port: 8000
@@ -59,6 +60,7 @@ data:
         port: 8000
         path: /.well-known
         preservePath: true
+{{- end }}
 {{- if (index .Values "url-summary" "enabled") }}
       - name: url-summary
         host: url-summary-lb
@@ -131,4 +133,3 @@ data:
           timeout: 5s
           send_batch_size: 100
 {{- end }}
-

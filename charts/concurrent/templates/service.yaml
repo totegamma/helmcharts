@@ -30,6 +30,8 @@ spec:
   type: ClusterIP
 
 ---
+
+{{- if .Values.ccactivitypub.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -44,6 +46,7 @@ spec:
   selector:
     name: ccactivitypub
   type: ClusterIP
+{{- end }}
 
 ---
 apiVersion: v1
@@ -141,4 +144,3 @@ spec:
     name: mediaserver
   type: ClusterIP
 {{ end }}
-
