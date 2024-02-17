@@ -85,6 +85,7 @@ spec:
 
 ---
 
+{{- if .Values.activitypub.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -132,6 +133,7 @@ spec:
                   items:
                     - key: activitypub.yaml
                       path: activitypub.yaml
+{{- end }}
 
 ---
 
@@ -348,4 +350,3 @@ spec:
             value: {{ .Values.mediaserver.quota | quote }}
 
 {{ end }}
-

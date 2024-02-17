@@ -1,10 +1,9 @@
-
 server:
-  dsn: "host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable"
-  redisAddr: "redis:6379"
-  memcachedAddr: "memcached:11211"
-  captchaSitekey: "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-  captchaSecret: "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+  dsn: 'host=db user=postgres password=postgres dbname=concurrent port=5432 sslmode=disable'
+  redisAddr: 'redis:6379'
+  memcachedAddr: 'memcached:11211'
+  captchaSitekey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+  captchaSecret: '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'
 
 monitoring:
   enabled: true
@@ -22,9 +21,10 @@ mediaserver:
   accessKeyId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   accessKeySecret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publicBaseUrl: https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/
-  quota: "1000000000"
+  quota: '1000000000'
 
 activitypub:
+  enabled: false
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   notificationStream: xxxxxxxxxxxxxxxxxxxx@example.tld
 
@@ -44,27 +44,27 @@ url-summary:
   enabled: true
   LB_LISTEN_PORT: 80
   APP_TARGET_PORT: 8080
-  CORS: ""
+  CORS: ''
   LB_TYPE: ClusterIP
 
 observability:
   metrics:
-    endpoint: ""
-    password: ""
-    username: ""
+    endpoint: ''
+    password: ''
+    username: ''
   logs:
-    url: ""
+    url: ''
   traces:
-    endpoint: ""
-    password: ""
-    username: ""
+    endpoint: ''
+    password: ''
+    username: ''
 
 profile:
   nickname: concurrent-domain
   description: domain description
   logo: ''
   wordmark: ''
-  themeColor: "#20193b"
+  themeColor: '#20193b'
   rules: |
     - リスペクトを持って接しましょう
       Treat everyone with respect
@@ -76,7 +76,6 @@ profile:
   maintainerName: changeme
   maintainerEmail: changeme@example.com
 
-
 backup:
   enabled: true
   cron: '* 20 * * *'
@@ -84,4 +83,3 @@ backup:
   aws_access_key_id: ''
   aws_secret_access_key: ''
   aws_default_region: 'ap-northeast-1'
-
