@@ -21,6 +21,7 @@ mediaserver:
   accessKeyId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   accessKeySecret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publicBaseUrl: https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/
+  region: auto
   quota: "1000000000"
 
 activitypub:

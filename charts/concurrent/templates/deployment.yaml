@@ -348,5 +348,8 @@ spec:
             value: {{ .Values.server.dsn | quote }}
           - name: quota
             value: {{ .Values.mediaserver.quota | quote }}
+          - name: region
+            value: {{ .Values.mediaserver.region | quote }}
+
 
 {{ end }}
