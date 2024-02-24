@@ -336,8 +336,8 @@ spec:
         env:
           - name: bucketName
             value: {{ .Values.mediaserver.bucketName | quote }}
-          - name: accountId
-            value: {{ .Values.mediaserver.accountId | quote }}
+          - name: endpointUrl
+            value: {{ .Values.mediaserver.endpointUrl | quote }}
           - name: accessKeyId
             value: {{ .Values.mediaserver.accessKeyId | quote }}
           - name: accessKeySecret

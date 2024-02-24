@@ -17,7 +17,7 @@ mediaserver:
   enabled: false
   image: ghcr.io/totegamma/cc-media-server:main
   bucketName: YOUR_BUCKET_NAME
-  accountId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  endpointUrl: https://xxxxxx.r2.cloudflarestorage.com
   accessKeyId: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   accessKeySecret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   publicBaseUrl: https://pub-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.r2.dev/
