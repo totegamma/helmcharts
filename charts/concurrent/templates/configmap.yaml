@@ -17,6 +17,7 @@ data:
       fqdn: {{ .Values.concurrent.fqdn }}
       registration: {{ .Values.concurrent.registration }}
       privatekey: {{ .Values.concurrent.privatekey }}
+      dimension: {{ .Values.concurrent.dimension }}
 
     profile:
       nickname: {{ .Values.profile.nickname }}

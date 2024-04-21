@@ -12,6 +12,7 @@ concurrent:
   fqdn: example.tld
   registration: invite
   privatekey: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  dimension: concrnt-devnet
 
 mediaserver:
   enabled: false
@@ -29,17 +30,17 @@ activitypub:
   notificationStream: xxxxxxxxxxxxxxxxxxxx@example.tld
 
 ccgateway:
-  image: ghcr.io/totegamma/ccgateway:master
+  image: ghcr.io/totegamma/ccgateway:latest
 
 ccapi:
-  image: ghcr.io/totegamma/ccapi:master
+  image: ghcr.io/totegamma/ccapi:latest
 
 ccactivitypub:
   enabled: false
   image: ghcr.io/totegamma/ccworld-ap-bridge:latest
 
 ccwebui:
-  image: ghcr.io/totegamma/ccwebui:master
+  image: ghcr.io/totegamma/ccwebui:latest
 
 url-summary:
   enabled: true
