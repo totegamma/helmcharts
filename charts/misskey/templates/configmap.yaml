@@ -135,9 +135,9 @@ data:
     signToActivityPubGet: true
 
     # Static JSON served at /.well-known/tip-router
+    # (rendered as JSON so that values like 0x... addresses stay strings)
 {{- if .Values.tipRouter }}
-    tipRouter:
-{{ toYaml .Values.tipRouter | indent 6 }}
+    tipRouter: {{ toJson .Values.tipRouter }}
 {{- end }}
 
     #allowedPrivateNetworks: [
