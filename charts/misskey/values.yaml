@@ -9,6 +9,15 @@ web:
   NODE_ENV: 'production'
   replicas: 1
 
+# Static JSON served at /.well-known/tip-router (requires a misskey build that supports `tipRouter`).
+# Leave empty to disable (the endpoint returns 404).
+# tipRouter:
+#   version: 1
+#   tipjars:
+#     ethereum: '0xYOUR_ETHEREUM_ADDRESS_HERE'
+#   feeBps: 9500
+tipRouter: {}
+
 db:
   hostname: 'misskey-db'
   port: 5432

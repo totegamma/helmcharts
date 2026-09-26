@@ -134,6 +134,12 @@ data:
     # Sign to ActivityPub GET request (default: true)
     signToActivityPubGet: true
 
+    # Static JSON served at /.well-known/tip-router
+{{- if .Values.tipRouter }}
+    tipRouter:
+{{ toYaml .Values.tipRouter | indent 6 }}
+{{- end }}
+
     #allowedPrivateNetworks: [
     #  '127.0.0.1/32'
     #]
