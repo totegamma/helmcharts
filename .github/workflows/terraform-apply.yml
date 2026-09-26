@@ -14,6 +14,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+
     - name: Configure AWS credentials from IAM Role
       uses: aws-actions/configure-aws-credentials@v1
       with:
@@ -51,4 +54,3 @@ jobs:
       run: |
         ID=$(terraform -chdir=terraform show -json | jq -r '.values.root_module.resources | map(select(.address == "aws_cloudfront_distribution.static-www"))[0] | .values.id')
         aws cloudfront create-invalidation --distribution-id $ID --paths "/*"
-
